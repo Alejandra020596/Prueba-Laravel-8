@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Policies\UserPolicy;
+use App\User;
 use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,8 +25,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+    protected $policies = [
+        User::class => UserPolicy::class,
+    ];
     public function boot()
     {
-        //
+
+        Passport::routes();
     }
 }
